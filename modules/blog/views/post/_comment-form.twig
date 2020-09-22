@@ -1,0 +1,23 @@
+{{ use('yii/widgets/ActiveForm') }}
+{% set form = active_form_begin({
+    'id' : 'comment-form',
+    'options' : {'class' : 'form-horizontal'},
+    'action' : '/comment-add'
+}) %}
+    <h3>Comment form</h3>
+
+    {% if app.session.hasFlash('success-comment-save') %}
+        <div class="alert alert-success">
+            {{ app.session.getFlash('success-comment-save') | e }}
+        </div>
+    {% endif %}
+
+    {{ form.field(postComment, 'text').textArea() | raw }}
+    {{ form.field(postComment, 'post_id').hiddenInput().label(false) | raw }}
+
+    <div class="form-group">
+        <input type="submit" value="Send" class="btn btn-primary" />
+    </div>
+
+    
+{{ active_form_end() }}

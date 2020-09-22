@@ -1,0 +1,19 @@
+<div class="posts">
+    {% if posts %}
+        {% for post in posts %}
+            <h1 class="post__title">{{ post.title|e }}</h1>
+
+            <div class="post__date">
+                {{ post.created_at|date("F jS, Y, H:i") }}
+            </div>
+
+            {{ post.shortDescription|raw }}
+
+            <div class="post__actions">
+                <a href="{{ post.url }}" class="btn btn-primary post__view-btn">Read more</a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>There are no published posts yet. You can be the first!</p>
+    {% endif %}
+</div>

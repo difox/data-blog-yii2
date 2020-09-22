@@ -1,0 +1,28 @@
+<h1 class="post-page__title">{{ post.title|e }}</h1>
+
+<div class="post-page__date">
+    {{ post.created_at|date("F jS, Y, H:i") }}
+</div>
+
+<div class="post-page__description">
+    {{ post.description|raw }}
+</div>
+
+<a href="{{ path(['/blog/post/index']) }}" class="btn btn-primary">Back to the list</a>
+
+<div class="post-page__comments">
+{% if comments %}
+    {% for comment in post.comments %}
+        {% include "_comment.twig" %}
+    {% endfor %}
+{% else %}
+    <p>There is no comments yet.</p>
+{% endif %}
+</div>
+
+{% if app.user.isGuest == false %}
+    {% include "_comment-form.twig" %}
+{% else %}
+    <br />
+    <p>Please, login to see comment form</p>
+{% endif %}
